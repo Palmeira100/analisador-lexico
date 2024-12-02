@@ -19,7 +19,16 @@ public class mainclass {  // Nome da classe com a primeira letra maiúscula
                     System.out.println(token);
                 }
             } while (token != null);  // Continua até não haver mais tokens
-        } catch (Exception e) {
+            
+            System.out.println("\n--- TOKENS ---");
+            sc.printTokens();
+
+            System.out.println("\n---  SÍMBOLOS ---");
+            sc.printSymbolTable();
+        } 
+        
+        
+        catch (Exception e) {
             // Trata exceções que possam ocorrer
             System.err.println("Erro: " + e.getMessage());
             e.printStackTrace();
