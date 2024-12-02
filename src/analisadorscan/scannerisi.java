@@ -10,7 +10,7 @@ public class scannerisi {
 
     private char[] content;
     private int position;
-    private List<Token> tokens;  // Lista para armazenar os tokens
+    private List<Token> tokens;  
     private int identifierCount = 0;
     private int numberCount = 0;
     private int operatorCount = 0;
@@ -23,7 +23,7 @@ public class scannerisi {
             String txtContent = new String(bytes, StandardCharsets.UTF_8);
             content = txtContent.toCharArray(); 
             position = 0;
-            tokens = new ArrayList<>();  // Inicializa a lista de tokens
+            tokens = new ArrayList<>();  
         } catch (Exception ex) {
             ex.printStackTrace(); 
         }
@@ -34,108 +34,102 @@ public class scannerisi {
 
         char currentChar = nextChar(); 
 
-        // Ignora espaços em branco
+ 
         while (isSpace(currentChar) && !isEndOfFile()) {
             currentChar = nextChar();
         }
-
-        // Se o caractere for um identificador (letras)
         if (isChar(currentChar)) {
             Token token = createIdentifierToken(); 
-            tokens.add(token);  // Armazena o token na lista
-            identifierCount++;  // Incrementa o contador de identificadores
-            return token;
-        } 
-        // Se o caractere for um número
-        else if (isNumber(currentChar)) {
-            Token token = createNumberToken(); 
-            tokens.add(token);  // Armazena o token na lista
-            numberCount++;  // Incrementa o contador de números
-            return token;
-        } 
-        // Se o caractere for um operador
-        else if (isOperator(currentChar)) {
-            Token token = createOperatorToken(); 
-            tokens.add(token);  // Armazena o token na lista
-            operatorCount++;  // Incrementa o contador de operadores
+            tokens.add(token);  
+            identifierCount++; 
             return token;
         }
-        // Se o caractere for um parêntese de abertura ou fechamento
+        else if (isNumber(currentChar)) {
+            Token token = createNumberToken(); 
+            tokens.add(token);  
+            numberCount++;  
+            return token;
+        } 
+        else if (isOperator(currentChar)) {
+            Token token = createOperatorToken(); 
+            tokens.add(token);  
+            operatorCount++;  
+            return token;
+        }
+    
         else if (currentChar == '(') {
             Token token = createParenthesisToken("(");
-            tokens.add(token);  // Armazena o token na lista
-            parenthesisCount++;  // Incrementa o contador de parênteses
+            tokens.add(token); 
+            parenthesisCount++;  
             return token;
         } else if (currentChar == ')') {
             Token token = createParenthesisToken(")");
-            tokens.add(token);  // Armazena o token na lista
-            parenthesisCount++;  // Incrementa o contador de parênteses
+            tokens.add(token);  
+            parenthesisCount++;  
             return token;
         }
-        // Se o caractere for um colchete de abertura ou fechamento
+       
         else if (currentChar == '[') {
             Token token = createBracketToken("[");
-            tokens.add(token);  // Armazena o token na lista
-            bracketCount++;  // Incrementa o contador de colchetes
+            tokens.add(token);  
+            bracketCount++;  
             return token;
         } else if (currentChar == ']') {
             Token token = createBracketToken("]");
-            tokens.add(token);  // Armazena o token na lista
-            bracketCount++;  // Incrementa o contador de colchetes
+            tokens.add(token);  
+            bracketCount++;  
             return token;
         }
         
         else if (currentChar == '{') {
             Token token = createBracketToken("{");
-            tokens.add(token);  // Armazena o token na lista
-            bracketCount++;  // Incrementa o contador de colchetes
+            tokens.add(token); 
+            bracketCount++;  
             return token;
         } else if (currentChar == '}') {
             Token token = createBracketToken("}");
-            tokens.add(token);  // Armazena o token na lista
-            bracketCount++;  // Incrementa o contador de colchetes
+            tokens.add(token);  
+            bracketCount++;  
             return token;
         }
         else if (currentChar == ',') {
             Token token = createBracketToken(",");
-            tokens.add(token);  // Armazena o token na lista
-            bracketCount++;  // Incrementa o contador de colchetes
+            tokens.add(token);  
+            bracketCount++; 
             return token;
         } 
         else if (currentChar == ';') {
             Token token = createBracketToken(";");
-            tokens.add(token);  // Armazena o token na lista
-            bracketCount++;  // Incrementa o contador de colchetes
+            tokens.add(token);  
+            bracketCount++;  
             return token;
         } 
         else if (currentChar == '*') {
             Token token = createBracketToken("*");
-            tokens.add(token);  // Armazena o token na lista
-            bracketCount++;  // Incrementa o contador de colchetes
+            tokens.add(token);  
+            bracketCount++;  
             return token;
         } 
         else if (currentChar == '.') {
             Token token = createBracketToken(".");
-            tokens.add(token);  // Armazena o token na lista
-            bracketCount++;  // Incrementa o contador de colchetes
+            tokens.add(token); 
+            bracketCount++;  
             return token;
         } 
 
-        
-        // Se o caractere não for reconhecido
         throw new IllegalArgumentException("Caractere inválido encontrado: " + currentChar);
     }
 
     private Token createBracketToken(String value) {
         Token token = new Token();
-        token.setType(Token.TK_BRACKET);  // Defina um tipo adequado para o colchete
+        token.setType(Token.TK_BRACKET);  
         token.setValue(value);
         return token;
     }
 
     private Token createParenthesisToken(String value) {
         Token token = new Token();
-        token.setType(Token.TK_PARENTHESIS);  // Defina um tipo adequado para o parêntese
+        token.setType(Token.TK_PARENTHESIS);  
         token.setValue(value);
         return token;
     }
@@ -206,14 +200,14 @@ public class scannerisi {
         return position == content.length;
     }
 
-    // Método para imprimir todos os tokens encontrados
+    
     public void printTokens() {
         for (Token token : tokens) {
             System.out.println("Tipo: " + token.getType() + " Valor: " + token.getValue());
         }
     }
 
-    // Método para imprimir a tabela de símbolos (ou o número de tokens de cada tipo)
+   
     public void printSymbolTable() {
         System.out.println("Identificadores: " + identifierCount);
         System.out.println("Números: " + numberCount);
