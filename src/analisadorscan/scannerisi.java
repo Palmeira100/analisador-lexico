@@ -203,7 +203,7 @@ public class scannerisi {
     
     public void printTokens() {
         for (Token token : tokens) {
-            System.out.println("Tipo: " + token.getType() + " Valor: " + token.getValue());
+            System.out.println("Tipo: " + token.getType() + " Valor: " + token.getType());
         }
     }
 

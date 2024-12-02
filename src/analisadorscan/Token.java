@@ -72,7 +72,7 @@ public class Token {
     }
 
 
-    public String getValue() {
+    public String gettext() {
 		// TODO Auto-generated method stub
 		return text;
    
